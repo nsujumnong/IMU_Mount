@@ -1,0 +1,52 @@
+
+RUNNING NDI TRACKER FROM ADNANS COMPUTER
+
+my computer:
+export ROS_MASTER_URI=http://aimlab2:11311
+
+hostname -I
+
+export ROS_IP= <hostname- I>
+
+
+ssh to adnans computer:
+
+ssh -Y adnan@aimlab2
+password: davinci123
+
+roscd ndi_tracker_ros
+cd ..export ROS_MASTER_URI=http://aimlab2:11311
+cd share
+rosrun ndi_tracker_ros ndi_tracker -j ndi-vu.json
+
+
+RUN RVIZ
+
+python ndi_test.py
+
+rviz
+
+choose topic /ndi_test/fiducials
+
+
+
+RUNNING THE ROBOT
+
+without RViz:
+rosrun dvrk_robot dvrk_console_json -j /home/adnan/dvrk_ws/src/dvrk-ros/dvrk_robot/config/console-PSM2.json
+
+
+With Rviz: 
+roslaunch dvrk_robot dvrk_arm_rviz.launch arm:=PSM2 config:=/home/adnan/dvrk_ws/src/dvrk-ros/dvrk_robot/config/console-PSM2.json
+
+
+Publishing from Adnans Computer:
+[ WARN] [1521044693.867653391]: 1521044693.859133s, #1: PSM2: SetPositionJoint, arm not ready
+
+
+Publishing from My Computer
+Couldn't find an AF_INET address for [radian-GS40-6QE-Phantom]
+
+
+#NOTES
+/dvrk/psm<#>/position_cartesian_current is the jaw position forward kinematics. It has errors in x and y direction of 3mm when cm command or 0.3mm when mm command
